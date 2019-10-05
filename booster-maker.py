@@ -2,14 +2,24 @@
 
 import random
 
-green_index = int(input('\n# of Green cards: ') )
-white_index  = int(input('# of White cards: ') ) + green_index
-blue_index  = int(input('# of Blue cards: ') ) + white_index
-black_index  = int(input('# of Black cards: ') ) + blue_index
-red_index  = int(input('# of Red cards: ') ) + black_index
-gold_index  = int(input('# of Gold/Hybrid cards: ') ) + red_index
-colorless_index  = int(input('# of colorless cards: ') ) + gold_index
-boost_size = int(input('# of cards per booster pack: ') )
+cards = {
+    'green': 0,
+    'white': 0,
+    'blue': 0,
+    'red': 0,
+    'gold': 0,
+    'colorless': 0
+}
+
+cards['green'] = int(input('\n# of Green cards: '))
+cards['white'] = int(input('# of White cards: '))
+cards['blue'] = int(input('# of Blue cards: '))
+cards['black'] = int(input('# of Black cards: '))
+cards['red'] = int(input('# of Red cards: '))
+cards['gold']= int(input('# of Gold/Hybrid cards: '))
+cards['colorless'] = int(input('# of colorless cards: '))
+
+boost_size = int(input('# of cards per booster pack: '))
 
 #DEBUG print ("Red index: " + str(red_index) + "\n")
 ## Init section END
