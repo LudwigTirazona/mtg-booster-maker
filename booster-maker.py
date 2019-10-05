@@ -78,8 +78,8 @@ while boost_again:
                                     colorless_index -= 1
     if boost_success :
         print("\nBooster pack complete.\n")
-    while (boost_query != 'Y' and boost_query != 'y' and boost_query != 'N' and boost_query != 'n'): 
-        boost_query = input('Create a new booster pack? (y/n)')                                 
+    while (boost_query.lower() != 'y' and boost_query.lower() != 'n'):
+        boost_query = input('Create a new booster pack? (y/n)')
         #TODO Pick-up from here
         if (boost_query == 'N' or boost_query == 'n'):
             boost_again = False
