@@ -32,7 +32,7 @@ while boost_again:
     print ("\nGenerating booster pack #" + str(booster_counter) + "\n")
     boost_query = ' '
     for booster_index in range(0, boost_size):
-        if colorless_index == 0 :
+        if sum(cards.values()) == 0 :
             boost_success = False
             print("Insufficient cards to complete booster pack.\n")
             break
