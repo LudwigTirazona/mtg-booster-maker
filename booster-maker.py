@@ -35,16 +35,11 @@ boost_success = True
 
 while boost_again:
     booster_counter += 1
-    card_total = sum(cards.values())
-
-    if card_total == 0:
-        print("\nNo cards to generate a booster pack from.\n")
-        print("\nExiting program.\n")
-        break
 
     print ("\nGenerating booster pack #" + str(booster_counter) + "\n")
     boost_query = ' '
     for booster_index in range(0, boost_size):
+        card_total = sum(cards.values())
         if card_total == 0 :
             boost_success = False
             print("Insufficient cards to complete booster pack.\n")
@@ -60,8 +55,12 @@ while boost_again:
 
     while (boost_query.lower() != 'y' and boost_query.lower() != 'n'):
 
-        print('Remaining cards total: {}'.format(card_total))
-        boost_query = input('Create a new booster pack? (y/n)')
+        if card_total == 0:
+            print('Not enough remaining cards to complete a booster pack')
+            print('\nExiting program.')
+            boost_query = 'n'
+        else:
+            boost_query = input('Create a new booster pack? (y/n)')
 
-        if (boost_query == 'N' or boost_query == 'n'):
+        if boost_query.lower() == 'n':
             boost_again = False
