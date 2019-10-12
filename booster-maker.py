@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import random
+from itertools import chain, repeat
 
 cards = {
     'green': 0,
@@ -11,14 +12,20 @@ cards = {
     'colorless': 0
 }
 
-cards['green'] = int(input('\n# of Green cards: '))
-cards['white'] = int(input('# of White cards: '))
-cards['blue'] = int(input('# of Blue cards: '))
-cards['black'] = int(input('# of Black cards: '))
-cards['red'] = int(input('# of Red cards: '))
-cards['gold']= int(input('# of Gold/Hybrid cards: '))
-cards['colorless'] = int(input('# of colorless cards: '))
+def set_cards():
+    for color in cards:
+        prompt_string = '# of {} cards: '.format(color.capitalize())
 
+        prompts = chain([prompt_string], repeat("Not a valid number. Try again: "))
+        replies = map(input, prompts)
+        valid_response = next(filter(str.isdigit, replies))
+
+        cards[color] = int(valid_response)
+
+    return cards
+
+
+set_cards()
 boost_size = int(input('# of cards per booster pack: '))
 
 booster_index = 0
@@ -28,10 +35,17 @@ boost_success = True
 
 while boost_again:
     booster_counter += 1
+    card_total = sum(cards.values())
+
+    if card_total == 0:
+        print("\nNo cards to generate a booster pack from.\n")
+        print("\nExiting program.\n")
+        break
+
     print ("\nGenerating booster pack #" + str(booster_counter) + "\n")
     boost_query = ' '
     for booster_index in range(0, boost_size):
-        if sum(cards.values()) == 0 :
+        if card_total == 0 :
             boost_success = False
             print("Insufficient cards to complete booster pack.\n")
             break
@@ -46,6 +60,7 @@ while boost_again:
 
     while (boost_query.lower() != 'y' and boost_query.lower() != 'n'):
 
+        print('Remaining cards total: {}'.format(card_total))
         boost_query = input('Create a new booster pack? (y/n)')
 
         if (boost_query == 'N' or boost_query == 'n'):
